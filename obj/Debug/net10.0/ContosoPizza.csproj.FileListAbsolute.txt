@@ -32,4 +32,5 @@
 /home/wtalvaro/Downloads/Containers/arch-home/Projetos/dotnet/ContosoPizza/obj/Debug/net10.0/ContosoPizza.genruntimeconfig.cache
 /home/wtalvaro/Downloads/Containers/arch-home/Projetos/dotnet/ContosoPizza/obj/Debug/net10.0/ref/ContosoPizza.dll
 /home/wtalvaro/Downloads/Containers/arch-home/Projetos/dotnet/ContosoPizza/bin/Debug/net10.0/ContosoPizza.staticwebassets.runtime.json
-/home/wtalvaro/Downloads/Containers/arch-home/Projetos/dotnet/ContosoPizza/obj/Debug/net10.0/compressed/bze2mmfbdp-{0}-46x1hdq0h9-46x1hdq0h9.gz
+/home/wtalvaro/Downloads/Containers/arch-home/Projetos/dotnet/ContosoPizza/obj/Debug/net10.0/ContosoPizza.sourcelink.json
+/home/wtalvaro/Downloads/Containers/arch-home/Projetos/dotnet/ContosoPizza/obj/Debug/net10.0/compressed/bze2mmfbdp-{0}-zfourhbnux-zfourhbnux.gz
