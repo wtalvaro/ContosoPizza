@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contoso Pizza - Weather Forecast</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .weather-card {
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #0d6efd;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mb-4">Contoso Pizza</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Welcome to Contoso Pizza!</h2>
+                <p class="lead">This is a sample page that calls the Weather Forecast API.</p>
+                <p>Click the button below to get the current weather forecast.</p>
+                <button id="getWeatherBtn" class="btn btn-primary mb-4">Get Weather Forecast</button>
+
+                <div id="weatherResults" class="row">
+                    <!-- Os resultados da API serão inseridos aqui -->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">About</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>This page demonstrates a simple frontend that consumes an ASP.NET Core Web API.</p>
+                        <p>The API endpoint is <code>/WeatherForecast</code> and returns random weather data.</p>
+                        <p>Built with ASP.NET Core and vanilla JavaScript.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('getWeatherBtn').addEventListener('click', function () {
+            // A URL da API. Como a página é servida do mesmo domínio, podemos usar um caminho relativo.
+            // Se você estiver em um ambiente de desenvolvimento, a API está na mesma origem (localhost).
+            // Portanto, podemos usar '/WeatherForecast' (relativo ao host atual).
+            const apiUrl = '/WeatherForecast';
+
+            // Fazendo a requisição GET para a API
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Processa os dados recebidos
+                    displayWeather(data);
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                    document.getElementById('weatherResults').innerHTML =
+                        '<div class="alert alert-danger" role="alert">Failed to load weather data. Please try again.</div>';
+                });
+        });
+
+        function displayWeather(forecasts) {
+            const container = document.getElementById('weatherResults');
+            if (!forecasts || forecasts.length === 0) {
+                container.innerHTML = '<div class="alert alert-warning" role="alert">No weather data available.</div>';
+                return;
+            }
+
+            let html = '';
+            forecasts.forEach(forecast => {
+                // Formata a data (assumindo que forecast.Date é uma string no formato ISO)
+                const date = new Date(forecast.date);
+                const formattedDate = date.toLocaleDateString('en-US', {
+                    weekday: 'short',
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+
+                html += `
+                    <div class="col-md-4">
+                        <div class="card weather-card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">${formattedDate}</h5>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">${forecast.temperatureC}°C / ${forecast.temperatureF}°F</h3>
+                                <p class="card-text"><strong>Summary:</strong> ${forecast.summary}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>

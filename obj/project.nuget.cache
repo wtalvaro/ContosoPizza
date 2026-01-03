@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "o+fS8x2rKMg=",
+  "success": true,
+  "projectFilePath": "/home/wtalvaro/Downloads/Containers/arch-home/Projetos/dotnet/ContosoPizza/ContosoPizza.csproj",
+  "expectedPackageFiles": [
+    "/home/wtalvaro/Downloads/Containers/arch-home/.nuget/packages/microsoft.aspnetcore.openapi/10.0.0/microsoft.aspnetcore.openapi.10.0.0.nupkg.sha512",
+    "/home/wtalvaro/Downloads/Containers/arch-home/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
