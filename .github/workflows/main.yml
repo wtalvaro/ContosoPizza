@@ -1,0 +1,40 @@
+name: ContosoPizza CI
+
+# Gatilhos: roda ao dar push ou abrir PR na main
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build e Teste (C# 10)
+    runs-on: ubuntu-latest # Linux é mais rápido e barato para builds web
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v4
+
+    - name: Configurar .NET 10
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x' # Garante o uso da versão que você pediu
+
+    - name: Restaurar dependências
+      run: dotnet restore
+
+    - name: Build (Compilação)
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Executar Testes Unitários
+      run: dotnet test --configuration Release --no-build --verbosity normal
+
+    - name: Publicar Artefato (Opcional)
+      run: dotnet publish -c Release -o ./publish
+
+    - name: Upload do Build
+      uses: actions/upload-artifact@v4
+      with:
+        name: contoso-pizza-binaries
+        path: ./publish
